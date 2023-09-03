@@ -56,7 +56,7 @@ public class Battle extends MiniGame {
 	    bossBar = App.plugin.getServer().createBossBar("", BarColor.WHITE, BarStyle.SOLID, BarFlag.DARKEN_SKY);
 	}
 	amountInSpectator = 0;
-	if ((Math.round(App.tickCounter * 0.75f) % 24) == 0)
+	if ((Math.round(App.tickCounter * 0.6f) % 21) == 0)
 	{
 	    Sounds.playForAll(Sounds.CHEST, Bukkit.getWorld("lobby"), null);
 	}
@@ -146,7 +146,7 @@ public class Battle extends MiniGame {
 		player.setAllowFlight(false);
 		player.setFlying(false);
 	    }
-	    player.sendTitle("", TextAnims.getFrame(TextAnims.chestRefill, Math.round(App.tickCounter * 0.75f)), 0, 20, 0);
+	    player.sendTitle("", TextAnims.getFrame(TextAnims.chestRefill, Math.round(App.tickCounter * 0.6f)), 0, 20, 0);
 	}
 	// bossBar.setTitle(App.plugin.getServer().getOnlinePlayers().size() -
 	// amountInSpectator + " players remaining");
