@@ -1,37 +1,56 @@
 {
     "battle.gracezero": {
-        "category": "master",
         "sounds": [
-            "battle/gracezero"
+            {
+                "name": "battle/gracezero"
+            }
         ]
     },
     "battle.grace": {
-        "category": "master",
         "sounds": [
-            "battle/grace"
+            {
+                "name": "battle/grace"
+            }
         ]
     },
     "battle.chest": {
-        "category": "master",
         "sounds": [
-            "battle/chest",
-            "battle/chest2"
+            {
+                "name": "battle/chest"
+            },
+            {
+                "name": "battle/chest2"
+            }
         ]
     },
     "battle.death": {
-        "category": "master",
         "sounds": [
-            "battle/death",
-            "battle/death2"
+            {
+                "name": "battle/death"
+            },
+            {
+                "name": "battle/death2"
+            }
         ]
     },
     "battle.music": {
-        "category": "music",
         "sounds": [
-            "battle/music/BattleMode1",
-            "battle/music/BattleMode2",
-            "battle/music/BattleMode3",
-            "battle/music/BattleMode4"
+            {
+                "name": "battle/music/battle1",
+                "stream": true
+            },
+            {
+                "name": "battle/music/battle2",
+                "stream": true
+            },
+            {
+                "name": "battle/music/battle3",
+                "stream": true
+            },
+            {
+                "name": "battle/music/battle4",
+                "stream": true
+            }
         ]
     }
 }
