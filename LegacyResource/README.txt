@@ -1,0 +1,1 @@
+the zip file is for the minecraft server so it can download it
