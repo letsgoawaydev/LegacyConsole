@@ -1,9 +1,9 @@
-main: com.letsgoaway.legacyconsole.App
-name: App
+main: com.letsgoaway.legacyconsole.LegacyConsole
+name: LegacyConsole
 version: 1.0
 depend: [ProtocolLib]
-#commands:
-  # test:
-     # description: please work
-     # usage: /<command>
-     # permission: legacyconsole.test
+softdepend: ["Multiverse-Core"]
+commands:
+  hub:
+    description: Go to the hub.
+    usage: /<command>

@@ -33,7 +33,7 @@
             }
         ]
     },
-    "battle.music": {
+    "music.dragon": {
         "sounds": [
             {
                 "name": "battle/music/battle1",

@@ -1,9 +1,0 @@
-main: com.letsgoaway.legacyconsole.App
-name: App
-version: 1.0
-depend: [ProtocolLib]
-#commands:
-  # test:
-     # description: please work
-     # usage: /<command>
-     # permission: legacyconsole.test
