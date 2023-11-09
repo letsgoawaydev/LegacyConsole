@@ -1,0 +1,98 @@
+{
+  "ui.back": {
+    "sounds": [
+      {
+        "name": "random/back"
+      }
+    ]
+  },
+  "battle.gametick": {
+    "sounds": [
+      {
+        "name": "battle/gametick"
+      }
+    ]
+  },
+  "battle.gamestart": {
+    "sounds": [
+      {
+        "name": "battle/gamestart"
+      }
+    ]
+  },
+  "battle.gracezero": {
+    "sounds": [
+      {
+        "name": "battle/gracezero"
+      }
+    ]
+  },
+  "battle.grace": {
+    "sounds": [
+      {
+        "name": "battle/grace"
+      }
+    ]
+  },
+  "battle.lobby": {
+    "sounds": [
+      {
+        "name": "battle/lobby"
+      }
+    ]
+  },
+  "battle.lobbyaccent": {
+    "sounds": [
+      {
+        "name": "battle/lobbyaccent"
+      }
+    ]
+  },
+  "battle.lobbyzero": {
+    "sounds": [
+      {
+        "name": "battle/lobbyzero"
+      }
+    ]
+  },
+  "battle.chest": {
+    "sounds": [
+      {
+        "name": "battle/chest"
+      },
+      {
+        "name": "battle/chest2"
+      }
+    ]
+  },
+  "battle.death": {
+    "sounds": [
+      {
+        "name": "battle/death"
+      },
+      {
+        "name": "battle/death2"
+      }
+    ]
+  },
+  "music.dragon": {
+    "sounds": [
+      {
+        "name": "battle/music/battle1",
+        "stream": true
+      },
+      {
+        "name": "battle/music/battle2",
+        "stream": true
+      },
+      {
+        "name": "battle/music/battle3",
+        "stream": true
+      },
+      {
+        "name": "battle/music/battle4",
+        "stream": true
+      }
+    ]
+  }
+}

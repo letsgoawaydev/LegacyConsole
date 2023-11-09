@@ -13,12 +13,10 @@ public class PlayerUtils {
      *
      * helps with font stuffs
      */
-    public static Boolean isLegacy(Player player) {
-	ViaAPI api = Via.getAPI(); // Get the API
-	int version = api.getPlayerVersion(player); // Get the protocol version
-	if (version >= 718)
-	    return false;
-	else
-	    return true;
+    public static Boolean isCustomFontsSupported(Player player) {
+        ViaAPI api = Via.getAPI(); // Get the API
+        int version = api.getPlayerVersion(player); // Get the protocol version
+        if (version >= 718) return false;
+        else return true;
     }
 }

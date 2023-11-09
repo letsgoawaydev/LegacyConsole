@@ -18,7 +18,7 @@ public class HubCommand implements CommandExecutor {
         {
             Player player = (Player) sender;
             player.getInventory().clear();
-            for (MiniWorld hub : LegacyConsole.hubs.values())
+            for (MiniWorld hub : LegacyConsole.hubs)
             {
                 if (hub.world.getCBWorld().getPlayers().size() >= 20) continue;
                 else

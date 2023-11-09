@@ -1,0 +1,4 @@
+Loading BuildTools version: git-BuildTools-bb27140-162 (#162)
+Java Version: Java 8
+Current Path: C:\Users\ethps\OneDrive\Documents\serverPlugin\legacyconsole\LegacyConsole\.
+Please do not run BuildTools in a Dropbox, OneDrive, or similar. You can always copy the completed jars there later.

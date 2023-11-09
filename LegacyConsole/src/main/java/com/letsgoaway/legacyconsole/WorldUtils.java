@@ -11,7 +11,7 @@ import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
 public class WorldUtils {
 	static MultiverseCore core;
-	static MVWorldManager worldManager;
+	public static MVWorldManager worldManager;
 
 	public static Boolean isWorldLoaded(String name) {
 		for (World world : Bukkit.getWorlds())
@@ -43,13 +43,21 @@ public class WorldUtils {
 
 
 	// creates world that will only exist at runtime
-	public static MultiverseWorld createRuntimeWorld(String originalWorld, String newWorldName) {
+	public static MultiverseWorld createRuntimeWorld(String originalWorld, String newWorldName, Environment dimension) {
 		if (worldManager.getMVWorld(originalWorld) == null)
 		{
-			worldManager.addWorld(originalWorld, Environment.NORMAL, null, WorldType.NORMAL, true, null);
+			if (dimension == null)
+			{
+				dimension = Environment.NORMAL;
+			}
+			worldManager.addWorld(originalWorld, dimension, null, WorldType.NORMAL, false, null);
 		}
 		worldManager.cloneWorld(originalWorld, newWorldName);
 		worldManager.loadWorld(newWorldName);
+		MultiverseWorld world = worldManager.getMVWorld(newWorldName);
+		world.setKeepSpawnInMemory(false);
+		world.setAutoLoad(false);
+		world.setAllowAnimalSpawn(false);
 		return worldManager.getMVWorld(newWorldName);
 	}
 

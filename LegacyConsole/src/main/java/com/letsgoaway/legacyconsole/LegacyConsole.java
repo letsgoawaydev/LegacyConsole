@@ -1,46 +1,72 @@
 package com.letsgoaway.legacyconsole;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
+
+import com.comphenix.protocol.ProtocolLibrary;
 import com.letsgoaway.legacyconsole.commands.HubCommand;
+import com.letsgoaway.legacyconsole.commands.SetResourceProxyCommand;
+import com.letsgoaway.legacyconsole.resourcepack.ResourcePackServer;
 import com.samjakob.spigui.SpiGUI;
 
 /**
  * Hello world!
  *
  */
-public class LegacyConsole extends JavaPlugin {
+public class LegacyConsole extends JavaPlugin implements PluginMessageListener {
 	public static LegacyConsole plugin;
 	public static SpiGUI spiGUI;
 	static int tickCounter = 0;
 
-	public static Map<String, MiniWorld> hubs = new HashMap<String, MiniWorld>();
-	public static Map<String, MiniWorld> battle_lobby = new HashMap<String, MiniWorld>();
-	public static Map<String, MiniWorld> battle = new HashMap<String, MiniWorld>();
-
-
+	public static ArrayList<MiniWorld> hubs = new ArrayList<MiniWorld>();
+	public static ArrayList<MiniWorld> battle_lobby = new ArrayList<MiniWorld>();
+	public static ArrayList<MiniWorld> battle = new ArrayList<MiniWorld>();
+	public static ResourcePackServer resourcePackServer;
+	public static TitleHandler titleHandler;
 
 	@Override
 	public void onEnable() {
+		this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+		this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 		spiGUI = new SpiGUI(this);
 		LegacyConsole.plugin = this;
 		WorldUtils.init();
+		titleHandler = new TitleHandler(this, ProtocolLibrary.getProtocolManager());
+		titleHandler.registerPacketListeners();
 		this.getCommand("hub").setExecutor(new HubCommand());
-		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-		hubs.put("hub1", new MiniWorld(WorldUtils.createRuntimeWorld("tut_hub", "hub1"), new Hub()));
-		hubs.put("hub2", new MiniWorld(WorldUtils.createRuntimeWorld("tut_hub", "hub2"), new Hub()));
-		hubs.put("hub3", new MiniWorld(WorldUtils.createRuntimeWorld("tut_hub", "hub3"), new Hub()));
-		hubs.put("hub4", new MiniWorld(WorldUtils.createRuntimeWorld("tut_hub", "hub4"), new Hub()));
-		battle_lobby.put("temp", new MiniWorld(WorldUtils.createRuntimeWorld("lobby_backup", "temp"), new Lobby(GameTypes.BATTLE)));
+		this.getCommand("setRPProxy").setExecutor(new SetResourceProxyCommand());
+		Bukkit.getPluginManager().registerEvents(new MiscListener(), this);
+		hubs.add(new MiniWorld(new Hub()));
+		hubs.add(new MiniWorld(new Hub()));
+		hubs.add(new MiniWorld(new Hub()));
+		hubs.add(new MiniWorld(new Hub()));
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				update();
 			}
 
 		}, 0L, 1L);
+		try
+		{
+			resourcePackServer = new ResourcePackServer();
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+
+	}
+
+	@Override
+	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+
+		if (!channel.equals("BungeeCord"))
+		{
+			return;
+		}
 
 	}
 
@@ -48,24 +74,61 @@ public class LegacyConsole extends JavaPlugin {
 		// for (Player player : this.getServer().getOnlinePlayers()) {
 		// }
 		tickCounter++;
-		for (MiniWorld miniWorld : hubs.values())
+		TickTimer.update();
+		try
 		{
-			miniWorld.update();
+			for (MiniWorld miniWorld : hubs)
+			{
+				miniWorld.update();
+			}
+			for (MiniWorld miniWorld : battle_lobby)
+			{
+				if (miniWorld.gameIsDone)
+				{
+					battle_lobby.remove(miniWorld);
+				}
+				else
+				{
+					miniWorld.update();
+				}
+			}
+			for (MiniWorld miniWorld : battle)
+			{
+				if (miniWorld.gameIsDone)
+				{
+					battle.remove(miniWorld);
+				}
+				else
+				{
+					miniWorld.update();
+				}
+			}
 		}
-		for (MiniWorld miniWorld : battle_lobby.values())
+		catch (Exception e)
 		{
-			miniWorld.update();
+			// TODO handle
 		}
+
 	}
 
 
 	@Override
 	public void onDisable() {
-		for (MiniWorld miniW : hubs.values())
+		for (Player player : Bukkit.getOnlinePlayers())
+		{
+			player.kickPlayer("Server closed");
+		}
+		this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
+		this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+		for (MiniWorld miniW : hubs)
 		{
 			WorldUtils.deleteWorld(miniW.world.getName());
 		}
-		for (MiniWorld miniW : battle_lobby.values())
+		for (MiniWorld miniW : battle_lobby)
+		{
+			WorldUtils.deleteWorld(miniW.world.getName());
+		}
+		for (MiniWorld miniW : battle)
 		{
 			WorldUtils.deleteWorld(miniW.world.getName());
 		}

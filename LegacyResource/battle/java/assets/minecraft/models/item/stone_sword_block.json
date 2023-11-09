@@ -1,0 +1,21 @@
+{
+  "parent": "item/stone_sword",
+  "gui_light": "front",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 180, 0],
+      "translation": [-5.75, -1, 6],
+      "scale": [0.85, 0.85, 0.85]
+    },
+    "firstperson_righthand": {
+      "rotation": [-10, -10, 100],
+      "translation": [-4.35, 3, -0.5],
+      "scale": [0.68, 0.68, 0.68]
+    },
+    "firstperson_lefthand": {
+      "rotation": [10, 10, -100],
+      "translation": [-4.35, 999, -0.5],
+      "scale": [0.68, 0.68, 0.68]
+    }
+  }
+}
